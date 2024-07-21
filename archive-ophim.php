@@ -1,6 +1,13 @@
 <?php
 get_header();
 ?>
+
+<?php
+$regions = oIsset($_GET,'regions');
+$genres = oIsset($_GET,'genres');
+$years = oIsset($_GET,'years');
+$categories = oIsset($_GET,'categories');
+?>
 <div class="row">
     <div class="stui-pannel stui-pannel-bg clearfix">
         <div class="stui-pannel-box">
