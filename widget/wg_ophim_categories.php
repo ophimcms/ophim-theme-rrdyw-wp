@@ -73,11 +73,7 @@ class WG_oPhim_Categories extends WP_Widget
             $args['orderby'] = 'publish_date';
             $args['order'] = 'DESC';
         }
-		if ($orderby == 'update') {
-            $args['meta_key'] = 'ophim_fetch_ophim_update_time';
-            $args['orderby'] = 'meta_value_num';
-            $args['order'] = 'DESC';
-        }
+		
         if ($orderby == 'view') {
             $args['meta_key'] = 'ophim_view';
             $args['orderby'] = 'meta_value_num';
