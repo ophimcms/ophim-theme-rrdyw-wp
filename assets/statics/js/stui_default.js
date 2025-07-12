@@ -8,14 +8,14 @@ var stui = {
 		domain: document.domain,
 		title: document.title,
 		language: (navigator.browserLanguage || navigator.language).toLowerCase(),
-		canvas: function() {
+		canvas: function () {
 			return !!document.createElement("canvas").getContext
 		}(),
-		useragent: function() {
+		useragent: function () {
 			var a = navigator.userAgent;
 			return {
-				mobile: !! a.match(/AppleWebKit.*Mobile.*/),
-				ios: !! a.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+				mobile: !!a.match(/AppleWebKit.*Mobile.*/),
+				ios: !!a.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
 				android: -1 < a.indexOf("Android") || -1 < a.indexOf("Linux"),
 				iPhone: -1 < a.indexOf("iPhone") || -1 < a.indexOf("Mac"),
 				iPad: -1 < a.indexOf("iPad"),
@@ -28,47 +28,47 @@ var stui = {
 		}()
 	},
 	mobile: {
-		popup: function() {
+		popup: function () {
 			$popblock = $(".popup");
-			$(".open-popup").click(function() {
+			$(".open-popup").click(function () {
 				$popblock.addClass("popup-visible");
 				$("body").append('<div class="mask"></div>');
-				$(".close-popup").click(function() {
+				$(".close-popup").click(function () {
 					$popblock.removeClass("popup-visible");
 					$(".mask").remove();
 					$("body").removeClass("modal-open")
 				});
-				$(".mask").click(function() {
+				$(".mask").click(function () {
 					$popblock.removeClass("popup-visible");
 					$(this).remove();
 					$("body").removeClass("modal-open")
 				})
 			})
 		},
-		slide: function() {
-			$.getScript(SitePath+"statics/js/flickity.pkgd.min.js", function() {
-				$(".type-slide").each(function(a) {
-					$index = $(this).find('.active').index()*1;
-					if($index > 3){
-						$index = $index-3;
-					}else{
+		slide: function () {
+			$.getScript(SitePath + "statics/js/flickity.pkgd.min.js", function () {
+				$(".type-slide").each(function (a) {
+					$index = $(this).find('.active').index() * 1;
+					if ($index > 3) {
+						$index = $index - 3;
+					} else {
 						$index = 0;
 					}
 					$(this).flickity({
 						cellAlign: 'left',
 						freeScroll: true,
 						contain: true,
-						prevNextButtons: false,				
+						prevNextButtons: false,
 						pageDots: false,
 						initialIndex: $index
 					});
 				})
 			})
 		},
-		share: function() {
-			$(".open-share").click(function() {
+		share: function () {
+			$(".open-share").click(function () {
 				stui.browser.useragent.weixin ? $("body").append('<div class="mobile-share share-weixin"></div>') : $("body").append('<div class="mobile-share share-other"></div>');
-				$(".mobile-share").click(function() {
+				$(".mobile-share").click(function () {
 					$(".mobile-share").remove();
 					$("body").removeClass("modal-open")
 				})
@@ -76,40 +76,40 @@ var stui = {
 		}
 	},
 	flickity: {
-		carousel: function() {
-			$.getScript(SitePath+"statics/js/flickity.pkgd.min.js", function() {
+		carousel: function () {
+			$.getScript(SitePath + "statics/js/flickity.pkgd.min.js", function () {
 				$('.carousel_default').flickity({
-				  	cellAlign: 'left',
-				  	contain: true,
-				  	wrapAround: true,
-				  	autoPlay: true,
-				  	prevNextButtons: false
+					cellAlign: 'left',
+					contain: true,
+					wrapAround: true,
+					autoPlay: true,
+					prevNextButtons: false
 				});
 				$('.carousel_wide').flickity({
-				  	cellAlign: 'center',
-				  	contain: true,
-				  	wrapAround: true,
-				  	autoPlay: true,
+					cellAlign: 'center',
+					contain: true,
+					wrapAround: true,
+					autoPlay: true,
 				});
 				$('.carousel_center').flickity({
-				  	cellAlign: 'center',
-				  	contain: true,
-				  	wrapAround: true,
-				  	autoPlay: true,
-				  	prevNextButtons: false
+					cellAlign: 'center',
+					contain: true,
+					wrapAround: true,
+					autoPlay: true,
+					prevNextButtons: false
 				});
 				$('.carousel_right').flickity({
-				  	cellAlign: 'left',
-				  	wrapAround: true,
-				  	contain: true,
-				  	pageDots: false
+					cellAlign: 'left',
+					wrapAround: true,
+					contain: true,
+					pageDots: false
 				});
 			})
 		}
 	},
 	images: {
-		lazyload: function() {
-			$.getScript(SitePath+"statics/js/jquery.lazyload.js", function() {
+		lazyload: function () {
+			$.getScript(SitePath + "statics/js/jquery.lazyload.js", function () {
 				$(".lazyload").lazyload({
 					effect: "fadeIn",
 					threshold: 200,
@@ -118,23 +118,23 @@ var stui = {
 				})
 			})
 		},
-		qrcode: function() {
+		qrcode: function () {
 			$("img.qrcode").attr("src", "" + encodeURIComponent(stui.browser.url) + "")
 		}
 	},
 	common: {
-		bootstrap: function() {
-			$.getScript(SitePath+"statics/js/bootstrap.min.js", function() {
-				$('a[data-toggle="tab"]').on("shown.bs.tab", function(a) {
+		bootstrap: function () {
+			$.getScript(SitePath + "statics/js/bootstrap.min.js", function () {
+				$('a[data-toggle="tab"]').on("shown.bs.tab", function (a) {
 					var b = $(a.target).text();
 					$(a.relatedTarget).text();
 					$("span.active-tab").html(b)
 				})
 			})
 		},
-		headroom: function() {
-			$.getScript(SitePath+"statics/js/headroom.min.js", function() {
-				$("#header-top", function() {
+		headroom: function () {
+			$.getScript(SitePath + "statics/js/headroom.min.js", function () {
+				$("#header-top", function () {
 					(new Headroom(document.querySelector("#header-top"), {
 						tolerance: 5,
 						offset: 205,
@@ -147,20 +147,20 @@ var stui = {
 				});
 			})
 		},
-		collapse: function() {
-			$(".detail").on("click", ".detail-more", function() {
+		collapse: function () {
+			$(".detail").on("click", ".detail-more", function () {
 				$detailContent = $(".detail-content");
 				$detailSketch = $(".detail-sketch");
 				"none" == $detailContent.css("display") ? ($(this).html('Rút gọn <i class="icon iconfont icon-less"></i>'), $detailContent.show(), $detailSketch.hide()) : ($(this).html('Xem thêm <i class="icon iconfont icon-moreunfold"></i>'), $detailContent.hide(), $detailSketch.show())
 			})
 		},
-		scrolltop: function() {
+		scrolltop: function () {
 			var a = $(window);
 			$scrollTopLink = $("a.backtop");
-			a.scroll(function() {
+			a.scroll(function () {
 				500 < $(this).scrollTop() ? $scrollTopLink.css("display", "block") : $scrollTopLink.css("display", "none")
 			});
-			$scrollTopLink.on("click", function() {
+			$scrollTopLink.on("click", function () {
 				$("html, body").animate({
 					scrollTop: 0
 				}, 400);
@@ -169,8 +169,8 @@ var stui = {
 		}
 	}
 };
-$(document).ready(function() {
-	if(stui.browser.useragent.mobile){	
+$(document).ready(function () {
+	if (stui.browser.useragent.mobile) {
 		stui.mobile.slide();
 		stui.mobile.popup();
 		stui.mobile.share();
